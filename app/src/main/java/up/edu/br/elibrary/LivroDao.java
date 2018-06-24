@@ -31,7 +31,8 @@ public class LivroDao {
     public List<Livro> listar() {
         SQLiteDatabase conn = Conexao.getInstance().getReadableDatabase();
 
-        Cursor c = conn.query("livro", new String[] {
+        Cursor c;
+        c = conn.query("livro", new String[] {
                         "id", "titulo", "autor", "isbn", "edicao", "campus", "ano",
                         "capa", "status"},
                 null, null, null, null, "titulo");
@@ -54,7 +55,7 @@ public class LivroDao {
                         (c.getString(c.getColumnIndex("status"))));
                 livros.add(livro);
             } while (c.moveToNext());
-
+            c.close();
         }
         return livros;
     }

@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class LivroActivity extends AppCompatActivity {
-    Livro livro = new Livro();
+    Livro livro;
     int CAMERA_REQUEST = 1888;
 
     @Override
@@ -129,7 +129,7 @@ public class LivroActivity extends AppCompatActivity {
                     //TRATANDO O BITMAP PARA UM ARRAY DE BYTES
                     Bitmap bitmap = ((BitmapDrawable) imageCapa.getDrawable()).getBitmap();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
                     byte[] imageInBytes = baos.toByteArray();
                     livro.setCapa(imageInBytes);
 
