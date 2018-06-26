@@ -76,7 +76,7 @@ public class LivroViewActivity extends AppCompatActivity {
                 } else {
                     livro.setStatus(false);
 
-                    new LivroDao().salvar(livro);
+                    new LivroDao().salvar(livro, getApplicationContext());
 
                     //Notificação
                     Calendar calendar = Calendar.getInstance();

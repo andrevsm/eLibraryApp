@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+    ListView listLivros;
+    LivroAdapter livroAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         new Conexao(getApplicationContext(), "livroContext.db", null, 1);
 
         //SETTANDO ADAPTER
-        ListView listLivros = (ListView)findViewById(R.id._listLivros);
-        LivroAdapter livroAdapter = new LivroAdapter(new LivroDao().listar(), this);
+        listLivros = (ListView)findViewById(R.id._listLivros);
+        livroAdapter = new LivroAdapter(new LivroDao().listar(), this);
         listLivros.setAdapter(livroAdapter);
 
         //CLICK DO ADAPTER
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent editLivro = new Intent(MainActivity.this, LivroActivity.class);
                 editLivro.putExtra("livro", livro);
                 startActivity(editLivro);
+                finish();
 
                 return true;
             }
@@ -77,7 +80,12 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        livroAdapter = new LivroAdapter(new LivroDao().listar(), this);
+        listLivros.setAdapter(livroAdapter);
+    }
 }

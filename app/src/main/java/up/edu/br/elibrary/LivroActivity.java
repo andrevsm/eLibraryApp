@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 public class LivroActivity extends AppCompatActivity {
-    Livro livro;
+    Livro livro = new Livro();
     int CAMERA_REQUEST = 1888;
 
     @Override
@@ -85,7 +85,6 @@ public class LivroActivity extends AppCompatActivity {
                 btnDelete.setVisibility(View.GONE);
             }
 
-
             //Abrindo a Câmera
             imageCapa.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,8 +140,9 @@ public class LivroActivity extends AppCompatActivity {
                     }
 
                     //Instânciando o banco e salvando
-                    new LivroDao().salvar(livro);
-                    livro = null;
+                    LivroDao banco = new LivroDao();
+                    banco.salvar(livro, getApplicationContext());
+
 
                     //Toast message
                     Toast.makeText(getApplicationContext(), "Salvo com sucesso!",
@@ -151,6 +151,8 @@ public class LivroActivity extends AppCompatActivity {
                     //Mudando a Intent
                     Intent it = new Intent(LivroActivity.this, MainActivity.class);
                     startActivity(it);
+                    finish();
+                    livro = null;
                 }
             });
 

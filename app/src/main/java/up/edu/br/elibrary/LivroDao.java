@@ -1,6 +1,7 @@
 package up.edu.br.elibrary;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -8,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LivroDao {
-    public void salvar(Livro l) {
+    public void salvar(Livro l, Context context) {
+        Conexao conexao = new Conexao(context, "livroContext.db", null, 1);
         SQLiteDatabase conn = Conexao.getInstance().getWritableDatabase();
 
         ContentValues values = new ContentValues();
